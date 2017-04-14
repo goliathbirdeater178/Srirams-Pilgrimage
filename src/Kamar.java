@@ -1,20 +1,14 @@
-import java.awt.Graphics;
-
 public class Kamar extends Enemy{
+	
 
 	public Kamar(int x, int y) {
-		super(x, y);
-		
+		// TODO Auto-generated constructor stub
+		super(Resources.img_Kamar, x, y);
 	}
 
 	@Override
-	public void run() {
+	protected void run(int target_x, int target_y) {
 		// TODO Auto-generated method stub
-		this.x--;
-	}
-
-	public static void draw(Graphics g, int objectX, int objectY) {
-		g.drawImage(getImage(), objectX, objectY, null);
 		
 	}
 

@@ -4,28 +4,16 @@ import java.awt.image.BufferedImage;
 public abstract class Enemy extends Sprite{
 	protected int speed;
 	protected int hp;
-	public int ENEMY_ID;
 	
-	protected int x;
-	protected int y;
-	
-	protected static Image image;
-	
-	public Enemy(int x, int y){
-		super(x, y);
+	public Enemy(Image img, int x, int y, int speed, int hp){
+		super(img.getScaledInstance(64, 64, 0), x, y);
+		this.speed = speed;
+		this.hp = hp;
 	}
 	
-	public static void setImage(BufferedImage bi){
-		image = bi;
+	public Enemy(Image img, int x, int y){
+		this(img, x, y, 0, 0);
 	}
 	
-	public static Image getImage(){
-		return image;
-	}
-	public abstract void run(); //Function to run enemy
-	
-	
-	public int getID(){
-		return this.ENEMY_ID;
-	}
+	protected abstract void run(int target_x, int target_y);
 }

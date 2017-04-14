@@ -1,11 +1,11 @@
 public class GrassPlatform extends Platform{
 	public GrassPlatform(int x, int y){
-		super(x, y);
+		super(Resources.img_Grass, x, y);
+	}
+
+	@Override
+	protected void act(Sprite target, boolean collision) {
+		return;
 	}
 	
-	@Override
-	public void run() {
-		// TODO Auto-generated method stub
-		
-	}
 }

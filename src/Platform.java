@@ -1,38 +1,26 @@
-import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.image.BufferedImage;
 
 public abstract class Platform extends Sprite{
-	private static Image image;
-	public static int HEIGHT = 64;
-	public static int WIDTH = 64;
-	public Platform(int x, int y){
-		super(x, y);
+	public Platform(Image img, int x, int y){
+		super(img, x, y);
 	}
 	
-	public static void setImage(BufferedImage bi){
-		image = bi.getScaledInstance(64, 64, 64);
+	public void run(Sprite target){
+		if(target.collisionDetected){
+			act(target, false);
+		}
+		else if(target.aabb.overlapsWith(this.aabb)){
+			System.out.println("Platform AABB: " + this.aabb);
+			System.out.println("Target AABB: " + target.aabb);
+			target.collisionDetected = true;
+			target.stopVMovement();
+			act(target, true);
+		}
+		else{
+			target.unstop();
+			act(target, false);
+		}
 	}
 	
-	public static Image getImage(){
-		return image;
-	}
-	
-	public int PLATFORM_ID;
-	
-	public abstract void run();
-	
-	public static void draw(Graphics g, int x, int y){
-		g.drawImage(getImage(), x, y, null);
-			
-	}
-	
-	public int getX(){
-		return this.x;
-	}
-
-	public int getY() {
-		return this.y;
-	}
-	
+	protected abstract void act(Sprite target, boolean collision);
 }

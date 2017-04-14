@@ -14,38 +14,7 @@ public class GameLoop extends JPanel implements KeyListener{
 	private static final long serialVersionUID = 1L; //K
 	
 	public GameLoop(){
-		setFocusable(true);
-		addKeyListener(this);
-		Thread gameThread = new Thread(){
-			public void run(){
-				while(true){
-					for(int i = 0; i < Resources.levelArray.size(); i++){
-						currentLevel = Resources.levelArray.get(i);
-						currentBackground = currentLevel.getBackground();
-						while(true){
-							if(levelCompleted) break;
-							checkForInput();
-							handleInput();
-							update();
-							handleCollisions();
-							
-							repaint();
-							
-							try {
-								Thread.sleep(1000/REFRESH_RATE);
-							} catch (InterruptedException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-						}
-						levelCompleted = false;
-					}
-					System.exit(0);
-
-				}
-			}
-		};
-		gameThread.start();
+		
 
 	}
 
@@ -178,30 +147,5 @@ public class GameLoop extends JPanel implements KeyListener{
 		platformsOnScreen.add(p)
 	}*/
 	
-	public enum GameState{
-		GAME_OVER, GAME_PAUSED, GAME_PLAYING
-	};
-	public static final int REFRESH_RATE = 60; //Run at 60 FPS
 	
-	public Sriram sri = new Sriram();
-	
-	private ArrayList<Integer> KeyQueue = new ArrayList<Integer>();
-	private GameState gamestate;
-	//private int numLevelsCompleted = 0;
-	
-	private ArrayList<Enemy> enemiesOnScreen = new ArrayList<Enemy>();
-	private ArrayList<Platform> platformsOnScreen = new ArrayList<Platform>();
-	
-	private boolean levelCompleted = false;
-	private Level currentLevel;
-	
-	private Graphics2D g;
-	private Resources resources = new Resources();
-	
-	private BufferedImage currentBackground; 
-	private boolean interruptsEnabled;
-	private boolean gravityEnabled = true;; //Turned off when Sri collides with a platform
-
-	private int camera_left_bound = 0;
-	private int camera_right_bound = 100;
 }
